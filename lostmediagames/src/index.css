@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap');
+
+@layer base {
+  :root {
+    --background: 0 0% 2%;
+    --foreground: 0 0% 75%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 75%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 75%;
+    --primary: 0 85% 40%;
+    --primary-foreground: 0 0% 95%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 75%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 120 70% 35%;
+    --accent-foreground: 120 70% 85%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 95%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 85% 40%;
+    --radius: 0px;
+    --retro-red: 0 85% 40%;
+    --retro-green: 120 70% 45%;
+    --retro-blue: 210 90% 50%;
+    --retro-teal: 175 70% 45%;
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 0 0% 75%;
+    --sidebar-primary: 0 85% 40%;
+    --sidebar-primary-foreground: 0 0% 95%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 75%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 0 85% 40%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'VT323', 'Tahoma', 'Verdana', monospace;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Crect width='2' height='16' fill='%23cc0000'/%3E%3Crect width='16' height='2' y='7' fill='%23cc0000'/%3E%3C/svg%3E") 8 8, crosshair;
+  }
+  a {
+    color: hsl(var(--retro-green));
+    text-decoration: underline;
+  }
+  a:hover {
+    color: hsl(var(--retro-blue));
+  }
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+}
+
+/* CRT Scanlines */
+.crt-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: multiply;
+}
+
+/* Glitch hover */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-1px, -2px); }
+  80% { transform: translate(1px, 1px); }
+  100% { transform: translate(0); }
+}
+.glitch-hover:hover {
+  animation: glitch 0.3s ease infinite;
+}
+
+/* Marquee */
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+/* Pixel border util */
+.pixel-border {
+  border: 2px solid hsl(var(--primary));
+  box-shadow:
+    2px 2px 0 hsl(var(--primary)),
+    -2px -2px 0 hsl(var(--primary)),
+    2px -2px 0 hsl(var(--primary)),
+    -2px 2px 0 hsl(var(--primary));
+}
+
+/* Blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* === TALKING TOM THEME === */
+body.theme-talkingtom {
+  --background: 150 20% 3%;
+  --foreground: 160 60% 70%;
+  --card: 150 20% 6%;
+  --card-foreground: 160 60% 70%;
+  --primary: 175 70% 45%;
+  --primary-foreground: 0 0% 2%;
+  --border: 175 50% 25%;
+  --accent: 175 70% 45%;
+  --accent-foreground: 0 0% 2%;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Cellipse cx='10' cy='10' rx='8' ry='10' fill='%2300ff88' opacity='0.7'/%3E%3Cellipse cx='10' cy='10' rx='3' ry='7' fill='black'/%3E%3C/svg%3E") 10 10, pointer;
+}
+body.theme-talkingtom .pixel-border {
+  border: 1px dotted hsl(175 70% 45%);
+  box-shadow: 0 0 8px hsl(175 70% 45% / 0.4);
+}
+
+/* Night vision grain for Talking Tom */
+@keyframes grain-tom {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-1%, -1%); }
+  30% { transform: translate(1%, 2%); }
+  50% { transform: translate(-2%, 1%); }
+  70% { transform: translate(2%, -1%); }
+  90% { transform: translate(-1%, 2%); }
+}
+body.theme-talkingtom::after {
+  content: '';
+  position: fixed;
+  inset: -10%;
+  z-index: 9998;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
+  opacity: 0.3;
+  animation: grain-tom 0.5s steps(4) infinite;
+  mix-blend-mode: overlay;
+}
+
+/* === HAPPY MOD THEME === */
+body.theme-happymod {
+  --background: 45 50% 85%;
+  --foreground: 30 30% 15%;
+  --card: 45 40% 80%;
+  --card-foreground: 30 30% 15%;
+  --primary: 50 90% 50%;
+  --primary-foreground: 30 30% 10%;
+  --border: 35 40% 60%;
+  --accent: 50 90% 50%;
+  --accent-foreground: 30 30% 10%;
+  font-family: 'Comic Sans MS', 'VT323', cursive;
+}
+body.theme-happymod .pixel-border {
+  border: 3px dashed hsl(35 40% 50%);
+  border-radius: 12px 4px 18px 6px;
+  box-shadow: none;
+}
+
+/* Jittering headers for Happy Mod */
+@keyframes jitter {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(1px, -1px) rotate(0.5deg); }
+  50% { transform: translate(-1px, 1px) rotate(-0.5deg); }
+  75% { transform: translate(1px, 0) rotate(0.3deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+body.theme-happymod h1,
+body.theme-happymod h2,
+body.theme-happymod h3 {
+  animation: jitter 0.15s infinite;
+  display: inline-block;
+}
+
+/* Flicker */
+@keyframes flicker {
+  0%, 100% { opacity: 0.97; }
+  50% { opacity: 0.94; }
+  75% { opacity: 0.98; }
+}
+.animate-flicker {
+  animation: flicker 0.1s infinite;
+}
