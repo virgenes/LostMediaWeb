@@ -93,7 +93,7 @@ const DesktopLayout = ({ children }: { children: ReactNode }) => (
 
     {/* Footer */}
     <footer className="border-t border-primary/30 bg-card px-4 py-2 text-center text-[10px] text-muted-foreground">
-      <div>© 2024 LOST MEDIA WEB — Todos los archivos son propiedad de nadie</div>
+      <div>© 2026 LOST MEDIA WEB — Todos los archivos son propiedad de nadie</div>
       <div className="text-primary/50 mt-1">Best viewed with Netscape Navigator 4.0 | 800x600 | 256 colors</div>
     </footer>
   </div>
